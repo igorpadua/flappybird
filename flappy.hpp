@@ -7,12 +7,13 @@ class Flappy
 {
 public:
     Flappy();
-    void run() const;
+    void run();
 
 protected:
     void events() const;
     void draw() const;
-    void game();
+    void game() const;
+    void moviePipes();
 
 private:
     std::unique_ptr<sf::RenderWindow> m_window;

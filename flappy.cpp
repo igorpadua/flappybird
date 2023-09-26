@@ -35,11 +35,17 @@ Flappy::Flappy() :
     m_pipeUp->setScale(1.5f, -1.5f);
 }
 
-void Flappy::run() const
+void Flappy::run()
 {
     while (m_window->isOpen()) {
         events();
         draw();
+
+        ++m_count;
+
+        if (m_count == 300) {
+            m_count = 0;
+        }
     }
 }
 
@@ -58,6 +64,35 @@ void Flappy::draw() const
 {
     m_window->clear(sf::Color::Black);
     m_window->draw(*m_background);
+    for (auto &p : m_pipes) {
+        m_window->draw(p);
+    }
     m_window->draw(*m_bird);
     m_window->display();
+}
+
+void Flappy::game() const
+{
+
+}
+
+void Flappy::moviePipes()
+{
+    if (m_count % 150 == 0) {
+        auto pos = std::rand() % 275 + 175;
+
+        m_pipeDown->setPosition(1000, pos + m_space);
+        m_pipeDown->setPosition(1000, pos);
+
+        m_pipes.push_back(*m_pipeDown);
+        m_pipes.push_back(*m_pipeUp);
+    }
+
+    for (int i = 0; i < m_pipes.size(); ++i) {
+        if (m_pipes[i].getPosition().x < 100) {
+            m_pipes.erase(m_pipes.begin() + i);
+        }
+
+        m_pipes[0].move(-4.f, 0);
+    }
 }
