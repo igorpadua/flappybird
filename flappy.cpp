@@ -32,14 +32,10 @@ Flappy::Flappy() :
     m_bird->setTextureRect(sf::IntRect(0, 0, 34, 24));
 
     m_pipeDown->setScale(1.5f, 1.5f);
-    m_pipeUp->setScale(1.5f, 1.5f);
-
-    // TEMP
-    m_pipeDown->setPosition(100.f, 200.f);
-    m_pipeUp->setPosition(100.f, 100.f);
+    m_pipeUp->setScale(1.5f, -1.5f);
 }
 
-void Flappy::run()
+void Flappy::run() const
 {
     while (m_window->isOpen()) {
         events();
@@ -47,7 +43,7 @@ void Flappy::run()
     }
 }
 
-void Flappy::events()
+void Flappy::events() const
 {
     auto event = std::make_unique<sf::Event>();
 
@@ -58,12 +54,10 @@ void Flappy::events()
     }
 }
 
-void Flappy::draw()
+void Flappy::draw() const
 {
     m_window->clear(sf::Color::Black);
     m_window->draw(*m_background);
-    m_window->draw(*m_pipeUp);
-    m_window->draw(*m_pipeDown);
     m_window->draw(*m_bird);
     m_window->display();
 }
