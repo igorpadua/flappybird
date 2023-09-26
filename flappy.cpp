@@ -17,9 +17,9 @@ Flappy::Flappy() :
     m_window->setPosition(sf::Vector2i(0, 0));
     m_window->setFramerateLimit(60);
 
-    m_bg.loadFromFile("../flappybird/resources/img/background.png");
-    m_flappy.loadFromFile("../flappybird/resources/img/flappy.png");
-    m_pipe.loadFromFile("../flappybird/resources/img/pipe.png");
+    m_bg.loadFromFile("./resources/img/background.png");
+    m_flappy.loadFromFile("./resources/img/flappy.png");
+    m_pipe.loadFromFile("./resources/img/pipe.png");
 
     m_background->setTexture(m_bg);
     m_bird->setTexture(m_flappy);

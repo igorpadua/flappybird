@@ -21,6 +21,10 @@ set(RESOURCE_FILES
     resources/font/flappybird.ttf
 )
 
+foreach(RESOURCE ${RESOURCE_FILES})
+    configure_file(${CMAKE_SOURCE_DIR}/${RESOURCE} ${CMAKE_BINARY_DIR}/${RESOURCE} COPYONLY)
+endforeach()
+
 include(GNUInstallDirs)
 install(TARGETS flappybird
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
