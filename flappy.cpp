@@ -13,6 +13,7 @@ Flappy::Flappy() :
   , m_bird(std::make_unique<sf::Sprite>())
   , m_pipeUp(std::make_unique<sf::Sprite>())
   , m_pipeDown(std::make_unique<sf::Sprite>())
+  , m_gameover(false)
 {
     m_window->setPosition(sf::Vector2i(0, 0));
     m_window->setFramerateLimit(60);
@@ -74,9 +75,11 @@ void Flappy::draw() const
 
 void Flappy::game()
 {
-    setAnimeBird();
-    movieBird();
-    movePipes();
+    if (!m_gameover) {
+        setAnimeBird();
+        movieBird();
+        movePipes();
+    }
 }
 
 void Flappy::movePipes()
@@ -84,6 +87,9 @@ void Flappy::movePipes()
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         m_gravity = -8.f;
+        m_bird->setRotation(-m_frame - 10.f);
+    } else {
+        m_bird->setRotation(m_frame - 10.f);
     }
 
     if (m_count % 150 == 0) {
@@ -97,6 +103,11 @@ void Flappy::movePipes()
     }
 
     for (int i = 0; i < m_pipes.size(); ++i) {
+
+        if (m_pipes[i].getGlobalBounds().intersects(m_bird->getGlobalBounds())) {
+            m_gameover = true;
+        }
+
         if (m_pipes[i].getPosition().x < -100) {
             m_pipes.erase(m_pipes.begin() + i);
         }

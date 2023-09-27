@@ -24,5 +24,6 @@ private:
     sf::Texture m_bg, m_flappy, m_pipe;
     std::unique_ptr<sf::Sprite> m_background, m_bird, m_pipeUp, m_pipeDown;
     std::vector<sf::Sprite> m_pipes;
+    bool m_gameover;
 };
 
