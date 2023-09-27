@@ -14,6 +14,7 @@ protected:
     void draw() const;
     void game();
     void movePipes();
+    void setAnimeBird();
 
 private:
     std::unique_ptr<sf::RenderWindow> m_window;

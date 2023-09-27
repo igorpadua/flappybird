@@ -74,6 +74,7 @@ void Flappy::draw() const
 
 void Flappy::game()
 {
+    setAnimeBird();
     movePipes();
 }
 
@@ -96,4 +97,15 @@ void Flappy::movePipes()
 
         m_pipes[i].move(-4.f, 0);
     }
+}
+
+void Flappy::setAnimeBird()
+{
+    m_frame += 0.15f;
+
+    if (m_frame > 3) {
+        m_frame -= 3;
+    }
+
+    m_bird->setTextureRect(sf::IntRect(34 * static_cast<int>(m_frame), 0, 34, 24));
 }
