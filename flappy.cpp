@@ -14,6 +14,7 @@ Flappy::Flappy() :
   , m_pipeUp(std::make_unique<sf::Sprite>())
   , m_pipeDown(std::make_unique<sf::Sprite>())
   , m_gameover(false)
+  , m_score(0)
 {
     m_window->setPosition(sf::Vector2i(0, 0));
     m_window->setFramerateLimit(60);
@@ -21,6 +22,14 @@ Flappy::Flappy() :
     m_bg.loadFromFile("./resources/img/background.png");
     m_flappy.loadFromFile("./resources/img/flappy.png");
     m_pipe.loadFromFile("./resources/img/pipe.png");
+
+    m_font.loadFromFile("./resources/font/flappybird.ttf");
+
+    m_txt_gameover.setFont(m_font);
+    m_txt_gameover.setString("Press SPACE to restart");
+    m_txt_gameover.setPosition(200, 300);
+    m_txt_gameover.setCharacterSize(50);
+    m_txt_gameover.setOutlineThickness(3);
 
     m_background->setTexture(m_bg);
     m_bird->setTexture(m_flappy);
@@ -70,6 +79,11 @@ void Flappy::draw() const
         m_window->draw(p);
     }
     m_window->draw(*m_bird);
+
+    if (m_gameover) {
+        m_window->draw(m_txt_gameover);
+    }
+
     m_window->display();
 }
 

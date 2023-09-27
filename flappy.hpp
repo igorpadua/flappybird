@@ -20,10 +20,12 @@ protected:
 private:
     std::unique_ptr<sf::RenderWindow> m_window;
     float m_gravity, m_frame, m_space;
-    int m_count;
+    int m_count, m_score;
     sf::Texture m_bg, m_flappy, m_pipe;
     std::unique_ptr<sf::Sprite> m_background, m_bird, m_pipeUp, m_pipeDown;
     std::vector<sf::Sprite> m_pipes;
     bool m_gameover;
+    sf::Font m_font;
+    sf::Text m_txt_score, m_txt_gameover;
 };
 
