@@ -75,11 +75,17 @@ void Flappy::draw() const
 void Flappy::game()
 {
     setAnimeBird();
+    movieBird();
     movePipes();
 }
 
 void Flappy::movePipes()
 {
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        m_gravity = -8.f;
+    }
+
     if (m_count % 150 == 0) {
         auto pos = std::rand() % 275 + 175;
 
@@ -108,4 +114,10 @@ void Flappy::setAnimeBird()
     }
 
     m_bird->setTextureRect(sf::IntRect(34 * static_cast<int>(m_frame), 0, 34, 24));
+}
+
+void Flappy::movieBird()
+{
+    m_bird->move(0, m_gravity);
+    m_gravity += 0.5f;
 }

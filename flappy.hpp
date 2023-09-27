@@ -15,6 +15,7 @@ protected:
     void game();
     void movePipes();
     void setAnimeBird();
+    void movieBird();
 
 private:
     std::unique_ptr<sf::RenderWindow> m_window;
