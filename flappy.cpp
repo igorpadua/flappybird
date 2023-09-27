@@ -116,12 +116,6 @@ void Flappy::game()
 void Flappy::movePipes()
 {
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-        m_gravity = -8.f;
-        m_bird->setRotation(-m_frame - 10.f);
-    } else {
-        m_bird->setRotation(m_frame - 10.f);
-    }
 
     if (m_count % 150 == 0) {
         auto pos = std::rand() % 275 + 175;
@@ -176,6 +170,13 @@ void Flappy::setAnimeBird()
 
 void Flappy::movieBird()
 {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        m_gravity = -8.f;
+        m_bird->setRotation(-m_frame - 10.f);
+    } else {
+        m_bird->setRotation(m_frame - 10.f);
+    }
+
     m_bird->move(0, m_gravity);
     m_gravity += 0.5f;
 }
