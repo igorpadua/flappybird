@@ -12,8 +12,8 @@ public:
 protected:
     void events() const;
     void draw() const;
-    void game() const;
-    void moviePipes();
+    void game();
+    void movePipes();
 
 private:
     std::unique_ptr<sf::RenderWindow> m_window;

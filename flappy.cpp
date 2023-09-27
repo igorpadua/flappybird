@@ -32,13 +32,14 @@ Flappy::Flappy() :
     m_bird->setTextureRect(sf::IntRect(0, 0, 34, 24));
 
     m_pipeDown->setScale(1.5f, 1.5f);
-    m_pipeUp->setScale(1.5f, -1.5f);
+    m_pipeUp->setScale(1.5f, -1.5);
 }
 
 void Flappy::run()
 {
     while (m_window->isOpen()) {
         events();
+        game();
         draw();
 
         ++m_count;
@@ -71,28 +72,28 @@ void Flappy::draw() const
     m_window->display();
 }
 
-void Flappy::game() const
+void Flappy::game()
 {
-
+    movePipes();
 }
 
-void Flappy::moviePipes()
+void Flappy::movePipes()
 {
     if (m_count % 150 == 0) {
         auto pos = std::rand() % 275 + 175;
 
         m_pipeDown->setPosition(1000, pos + m_space);
-        m_pipeDown->setPosition(1000, pos);
+        m_pipeUp->setPosition(1000, pos);
 
         m_pipes.push_back(*m_pipeDown);
         m_pipes.push_back(*m_pipeUp);
     }
 
     for (int i = 0; i < m_pipes.size(); ++i) {
-        if (m_pipes[i].getPosition().x < 100) {
+        if (m_pipes[i].getPosition().x < -100) {
             m_pipes.erase(m_pipes.begin() + i);
         }
 
-        m_pipes[0].move(-4.f, 0);
+        m_pipes[i].move(-4.f, 0);
     }
 }
