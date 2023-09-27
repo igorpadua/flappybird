@@ -136,6 +136,14 @@ void Flappy::movePipes()
     for (int i = 0; i < m_pipes.size(); ++i) {
 
         if (m_pipes[i].getGlobalBounds().intersects(m_bird->getGlobalBounds())) {
+            m_bird->move(15.f, 0);
+
+            if (m_pipes[i].getScale().y < 0) {
+                m_bird->move(0, -15.f);
+            } else {
+                m_bird->move(0, 15.f);
+            }
+
             m_gameover = true;
         }
 
