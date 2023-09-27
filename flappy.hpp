@@ -10,7 +10,7 @@ public:
     void run();
 
 protected:
-    void events() const;
+    void events();
     void draw() const;
     void game();
     void movePipes();

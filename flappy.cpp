@@ -60,7 +60,7 @@ void Flappy::run()
     }
 }
 
-void Flappy::events() const
+void Flappy::events()
 {
     auto event = std::make_unique<sf::Event>();
 
@@ -68,6 +68,12 @@ void Flappy::events() const
         if (event->type == sf::Event::Closed) {
             m_window->close();
         }
+    }
+
+    if (m_gameover && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        m_pipes.clear();
+        m_bird->setPosition(500.f - m_flappy.getSize().x / 2, 300.f - m_flappy.getSize().y / 2);
+        m_gameover = false;
     }
 }
 
