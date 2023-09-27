@@ -17,6 +17,7 @@ protected:
     void setAnimeBird();
     void movieBird();
     void collision();
+    void score();
 
 private:
     std::unique_ptr<sf::RenderWindow> m_window;

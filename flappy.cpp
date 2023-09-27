@@ -111,13 +111,12 @@ void Flappy::game()
         movieBird();
         movePipes();
         collision();
+        score();
     }
 }
 
 void Flappy::movePipes()
 {
-
-
     if (m_count % 150 == 0) {
         auto pos = std::rand() % 275 + 175;
 
@@ -129,20 +128,11 @@ void Flappy::movePipes()
     }
 
     for (int i = 0; i < m_pipes.size(); ++i) {
-
         if (m_pipes[i].getPosition().x < -100) {
             m_pipes.erase(m_pipes.begin() + i);
         }
 
         m_pipes[i].move(-4.f, 0);
-
-        if (m_pipes[i].getPosition().x == 448 and !m_add) {
-            ++m_score;
-            m_txt_score.setString(std::to_string(++m_score));
-            m_add = true;
-        } else {
-            m_add = false;
-        }
     }
 }
 
@@ -183,6 +173,19 @@ void Flappy::collision()
             }
 
             m_gameover = true;
+        }
+    }
+}
+
+void Flappy::score()
+{
+    for (int i = 0; i < m_pipes.size(); ++i) {
+        if (m_pipes[i].getPosition().x == 448 and !m_add) {
+            ++m_score;
+            m_txt_score.setString(std::to_string(++m_score));
+            m_add = true;
+        } else {
+            m_add = false;
         }
     }
 }
