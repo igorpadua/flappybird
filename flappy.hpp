@@ -24,7 +24,7 @@ private:
     sf::Texture m_bg, m_flappy, m_pipe;
     std::unique_ptr<sf::Sprite> m_background, m_bird, m_pipeUp, m_pipeDown;
     std::vector<sf::Sprite> m_pipes;
-    bool m_gameover;
+    bool m_gameover, m_add;
     sf::Font m_font;
     sf::Text m_txt_score, m_txt_gameover;
 };

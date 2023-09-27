@@ -14,6 +14,7 @@ Flappy::Flappy() :
   , m_pipeUp(std::make_unique<sf::Sprite>())
   , m_pipeDown(std::make_unique<sf::Sprite>())
   , m_gameover(false)
+  , m_add(false)
   , m_score(0)
 {
     m_window->setPosition(sf::Vector2i(0, 0));
@@ -30,6 +31,12 @@ Flappy::Flappy() :
     m_txt_gameover.setPosition(200, 300);
     m_txt_gameover.setCharacterSize(50);
     m_txt_gameover.setOutlineThickness(3);
+
+    m_txt_score.setFont(m_font);
+    m_txt_score.setString(std::to_string(m_score));
+    m_txt_score.setPosition(10.f, 10.f);
+    m_txt_score.setCharacterSize(50);
+    m_txt_score.setOutlineThickness(3);
 
     m_background->setTexture(m_bg);
     m_bird->setTexture(m_flappy);
@@ -70,7 +77,9 @@ void Flappy::events()
         }
     }
 
-    if (m_gameover && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+    if (m_gameover and sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        m_score = 0;
+        m_txt_score.setString(std::to_string(m_score));
         m_pipes.clear();
         m_bird->setPosition(500.f - m_flappy.getSize().x / 2, 300.f - m_flappy.getSize().y / 2);
         m_gameover = false;
@@ -89,6 +98,8 @@ void Flappy::draw() const
     if (m_gameover) {
         m_window->draw(m_txt_gameover);
     }
+
+    m_window->draw(m_txt_score);
 
     m_window->display();
 }
@@ -133,6 +144,14 @@ void Flappy::movePipes()
         }
 
         m_pipes[i].move(-4.f, 0);
+
+        if (m_pipes[i].getPosition().x == 448 and !m_add) {
+            ++m_score;
+            m_txt_score.setString(std::to_string(++m_score));
+            m_add = true;
+        } else {
+            m_add = false;
+        }
     }
 }
 
